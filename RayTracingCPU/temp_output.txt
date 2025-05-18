@@ -1,0 +1,8 @@
+Paralelización por BLOQUES RECTANGULARES
+Diffuse 0 -1000 0 1000 0.5 0.5 0.5
+Metallic 4 1 0 1 0.7 0.6 0.5 0
+Diffuse -4 1 0 1 0.4 0.2 0.1
+Crystaline 0 1 0 1 1.5
+Número de hilos (OpenMP): 16
+Tiempo de renderizado (OpenMP): 0.0639999 segundos.
+Imagen creada.

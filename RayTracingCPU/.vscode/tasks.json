@@ -1,0 +1,83 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar (Filas - MPI + OpenMP)",
+            "type": "shell",
+            "command": "cl",
+            "args": [
+                "/Zi", "/EHsc", "/openmp",
+                "/I", "C:/Program Files (x86)/Microsoft SDKs/MPI/Include",
+                "main.cpp", "utils.cpp", "random.cpp", "Scene.cpp", "Sphere.cpp", "Metallic.cpp", "Crystalline.cpp",
+                "/Fe:main.exe",
+                "/D", "PARALLEL_BY_ROWS=1",
+                "/D", "PARALLEL_BY_COLUMNS=0",
+                "/D", "PARALLEL_BY_BLOCKS=0",
+                "/link",
+                "/LIBPATH:C:/Program Files (x86)/Microsoft SDKs/MPI/Lib/x64",
+                "msmpi.lib"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Compilar (Columnas - MPI + OpenMP)",
+            "type": "shell",
+            "command": "cl",
+            "args": [
+                "/Zi", "/EHsc", "/openmp",
+                "/I", "C:/Program Files (x86)/Microsoft SDKs/MPI/Include",
+                "main.cpp", "utils.cpp", "random.cpp", "Scene.cpp", "Sphere.cpp", "Metallic.cpp", "Crystalline.cpp",
+                "/Fe:main.exe",
+                "/D", "PARALLEL_BY_ROWS=0",
+                "/D", "PARALLEL_BY_COLUMNS=1",
+                "/D", "PARALLEL_BY_BLOCKS=0",
+                "/link",
+                "/LIBPATH:C:/Program Files (x86)/Microsoft SDKs/MPI/Lib/x64",
+                "msmpi.lib"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Compilar (Bloques - MPI + OpenMP)",
+            "type": "shell",
+            "command": "cl",
+            "args": [
+                "/Zi", "/EHsc", "/openmp",
+                "/I", "C:/Program Files (x86)/Microsoft SDKs/MPI/Include",
+                "main.cpp", "utils.cpp", "random.cpp", "Scene.cpp", "Sphere.cpp", "Metallic.cpp", "Crystalline.cpp",
+                "/Fe:main.exe",
+                "/D", "PARALLEL_BY_ROWS=0",
+                "/D", "PARALLEL_BY_COLUMNS=0",
+                "/D", "PARALLEL_BY_BLOCKS=1",
+                "/link",
+                "/LIBPATH:C:/Program Files (x86)/Microsoft SDKs/MPI/Lib/x64",
+                "msmpi.lib"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Ejecutar (MPI - 4 procesos)",
+            "type": "shell",
+            "command": "mpiexec",
+            "args": [
+                "-n", "4",
+                "main.exe"
+            ],
+            "group": "test",
+            "problemMatcher": [],
+            "dependsOn": ["Compilar (Filas - MPI + OpenMP)"]
+        }
+    ]
+}
