@@ -1,0 +1,352 @@
+C:\Users\vcald\Documents\ComputacionDeAltasPrestaciones\practicas\PracticaCAP02\PracticaCAP2>cd RayTracingCPU
+
+C:\Users\vcald\Documents\ComputacionDeAltasPrestaciones\practicas\PracticaCAP02\PracticaCAP2\RayTracingCPU>cl /Zi /EHsc /openmp ^ /I"C:\Program Files (x86)\Microsoft SDKs\MPI\Include" ^ main.cpp utils.cpp random.cpp Scene.cpp Sphere.cpp Metallic.cpp Crystalline.cpp ^ /Fe:main.exe ^ /D PARALLEL_BY_ROWS=0 /D PARALLEL_BY_COLUMNS=0 /D PARALLEL_BY_BLOCKS=1 /D USE_MPI=1 ^ /link /LIBPATH:"C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x64" msmpi.lib
+Compilador de optimización de C/C++ de Microsoft (R) versión 19.43.34810 para x64
+(C) Microsoft Corporation. Todos los derechos reservados.
+
+main.cpp
+utils.cpp
+random.cpp
+Scene.cpp
+Sphere.cpp
+Metallic.cpp
+Crystalline.cpp
+Generando código...
+Microsoft (R) Incremental Linker Version 14.43.34810.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/debug
+/out:main.exe
+"/LIBPATH:C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x64"
+msmpi.lib
+main.obj
+utils.obj
+random.obj
+Scene.obj
+Sphere.obj 
+Metallic.obj
+Crystalline.obj
+
+C:\Users\vcald\Documents\ComputacionDeAltasPrestaciones\practicas\PracticaCAP02\PracticaCAP2\RayTracingCPU>mpiexec -n 4 main.exe
+Paralelizaci├│n por BLOQUES RECTANGULARES
+Proceso MPI: 2/4
+Paralelizaci├│n por BLOQUES RECTANGULARES
+Proceso MPI: 1/4
+Paralelizaci├│n por BLOQUES RECTANGULARES
+Proceso MPI: 0/4
+Paralelizaci├│n por BLOQUES RECTANGULARES
+Proceso MPI: 3/4
+N├║mero de hilos (OpenMP): 8
+N├║mero de hilos (OpenMP): 8
+N├║mero de hilos (OpenMP): 8
+N├║mero de hilos (OpenMP): 8
+N├║mero de hilos (OpenMP): 8
+N├║mero de hilos (OpenMP): 8
+N├║mero de hilos (OpenMP): 8
+N├║mero de hilos (OpenMP): 8
+Paralelizaci├│n por BLOQUES RECTANGULARES
+Tiempo de renderizado (OpenMP): 77.9469 segundos.
+Tiempo de renderizado (OpenMP): 77.9481 segundos.
+Imagen creada (MPI + OpenMP): imgCPU_f0.bmp
+Paralelizaci├│n por BLOQUES RECTANGULARES
+N├║mero de hilos (OpenMP): 8
+Paralelizaci├│n por BLOQUES RECTANGULARES
+Tiempo de renderizado (OpenMP): 78.4791 segundos.
+Tiempo de renderizado (OpenMP): 78.4802 segundos.
+Imagen creada (MPI + OpenMP): imgCPU_f2.bmp
+Paralelizaci├│n por BLOQUES RECTANGULARES
+N├║mero de hilos (OpenMP): 8
+Paralelizaci├│n por BLOQUES RECTANGULARES
+Tiempo de renderizado (OpenMP): 80.5707 segundos.
+Tiempo de renderizado (OpenMP): 80.5716 segundos.
+Imagen creada (MPI + OpenMP): imgCPU_f3.bmp
+Paralelizaci├│n por BLOQUES RECTANGULARES
+N├║mero de hilos (OpenMP): 8
+Paralelizaci├│n por BLOQUES RECTANGULARES
+Tiempo de renderizado (OpenMP): 84.147 segundos.
+Tiempo de renderizado (OpenMP): 84.148 segundos.
+Imagen creada (MPI + OpenMP): imgCPU_f1.bmp
+Paralelizaci├│n por BLOQUES RECTANGULARES
+N├║mero de hilos (OpenMP): 8
+Paralelizaci├│n por BLOQUES RECTANGULARES
+Tiempo de renderizado (OpenMP): 18.1054 segundos.
+Paralelizaci├│n por BLOQUES RECTANGULARES
+Tiempo de renderizado (OpenMP): 16.9989 segundos.
+Paralelizaci├│n por BLOQUES RECTANGULARES
+Tiempo de renderizado (OpenMP): 19.4769 segundos.
+Paralelizaci├│n por BLOQUES RECTANGULARES
+Tiempo de renderizado (OpenMP): 17.328 segundos.
+Imagen creada (MPI + OpenMP).
+
+
+C:\Users\vcald\Documents\ComputacionDeAltasPrestaciones\practicas\PracticaCAP02\PracticaCAP2\RayTracingCPU>powershell -ExecutionPolicy Bypass -File test_openmp_mpi.ps1
+===================================
+Compilando para modo: FILAS
+Compilador de optimización de C/C++ de Microsoft (R) versión 19.43.34810 para x64
+(C) Microsoft Corporation. Todos los derechos reservados.
+
+main.cpp
+utils.cpp
+random.cpp
+Scene.cpp
+Sphere.cpp
+Metallic.cpp
+Crystalline.cpp
+Generando código...
+Microsoft (R) Incremental Linker Version 14.43.34810.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/debug
+/out:main.exe
+"/LIBPATH:C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x64"
+msmpi.lib
+main.obj
+utils.obj
+random.obj 
+Scene.obj
+Sphere.obj
+Metallic.obj
+Crystalline.obj
+-------------------------------
+Ejecutando FILAS con 1 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 1 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 1 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 1 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 1 procesos MPI y 16 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 2 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 2 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 2 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 2 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 2 procesos MPI y 16 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 4 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 4 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 4 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 4 procesos MPI y 8 hilos OpenMP...
+Paralelizaci├│n por FILAS (j)
+N├║mero de hilos (OpenMP): 8
+Paralelizaci├│n por FILAS (j)
+N├║mero de hilos (OpenMP): 8
+Paralelizaci├│n por FILAS (j)
+N├║mero de hilos (OpenMP): 8
+Paralelizaci├│n por FILAS (j)
+N├║mero de hilos (OpenMP): 8
+Paralelizaci├│n por FILAS (j)
+Tiempo de renderizado (OpenMP): 71.0312 segundos.
+Imagen creada (MPI + OpenMP): imgCPU_f3.bmp
+Paralelizaci├│n por FILAS (j)
+N├║mero de hilos (OpenMP): 8
+Paralelizaci├│n por FILAS (j)
+Tiempo de renderizado (OpenMP): 71.6764 segundos.
+Imagen creada (MPI + OpenMP): imgCPU_f1.bmp
+Paralelizaci├│n por FILAS (j)
+N├║mero de hilos (OpenMP): 8
+Paralelizaci├│n por FILAS (j)
+Tiempo de renderizado (OpenMP): 72.6087 segundos.
+Imagen creada (MPI + OpenMP): imgCPU_f0.bmp
+Paralelizaci├│n por FILAS (j)
+N├║mero de hilos (OpenMP): 8
+Paralelizaci├│n por FILAS (j)
+Tiempo de renderizado (OpenMP): 11.3412 segundos.
+Paralelizaci├│n por FILAS (j)
+Tiempo de renderizado (OpenMP): 11.3664 segundos.
+Paralelizaci├│n por FILAS (j)
+Tiempo de renderizado (OpenMP): 84.1842 segundos.
+Imagen creada (MPI + OpenMP): imgCPU_f2.bmp
+Paralelizaci├│n por FILAS (j)
+N├║mero de hilos (OpenMP): 8
+Paralelizaci├│n por FILAS (j)
+Tiempo de renderizado (OpenMP): 15.3035 segundos.
+Paralelizaci├│n por FILAS (j)
+Tiempo de renderizado (OpenMP): 5.92187 segundos.
+Imagen creada (MPI + OpenMP).
+-------------------------------
+Ejecutando FILAS con 4 procesos MPI y 16 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 8 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 8 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 8 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 8 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 8 procesos MPI y 16 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 16 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 16 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 16 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 16 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando FILAS con 16 procesos MPI y 16 hilos OpenMP...
+===================================
+Compilando para modo: COLUMNAS
+Compilador de optimización de C/C++ de Microsoft (R) versión 19.43.34810 para x64
+(C) Microsoft Corporation. Todos los derechos reservados.
+
+main.cpp
+utils.cpp
+random.cpp
+Scene.cpp
+Sphere.cpp
+Metallic.cpp
+Crystalline.cpp
+Generando código...
+Microsoft (R) Incremental Linker Version 14.43.34810.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/debug
+/out:main.exe
+"/LIBPATH:C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x64"
+msmpi.lib
+main.obj
+utils.obj
+random.obj
+Scene.obj
+Sphere.obj
+Metallic.obj
+Crystalline.obj
+-------------------------------
+Ejecutando COLUMNAS con 1 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 1 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 1 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 1 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 1 procesos MPI y 16 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 2 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 2 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 2 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 2 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 2 procesos MPI y 16 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 4 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 4 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 4 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 4 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 4 procesos MPI y 16 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 8 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 8 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 8 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 8 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 8 procesos MPI y 16 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 16 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 16 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 16 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 16 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando COLUMNAS con 16 procesos MPI y 16 hilos OpenMP...
+===================================
+Compilando para modo: BLOQUES
+Compilador de optimización de C/C++ de Microsoft (R) versión 19.43.34810 para x64
+(C) Microsoft Corporation. Todos los derechos reservados.
+
+main.cpp
+utils.cpp
+random.cpp
+Scene.cpp
+Sphere.cpp
+Metallic.cpp
+Crystalline.cpp
+Generando código...
+Microsoft (R) Incremental Linker Version 14.43.34810.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/debug
+/out:main.exe
+"/LIBPATH:C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x64"
+msmpi.lib
+main.obj
+utils.obj
+random.obj
+Scene.obj
+Sphere.obj
+Metallic.obj
+Crystalline.obj
+-------------------------------
+Ejecutando BLOQUES con 1 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 1 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 1 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 1 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 1 procesos MPI y 16 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 2 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 2 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 2 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 2 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 2 procesos MPI y 16 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 4 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 4 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 4 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 4 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 4 procesos MPI y 16 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 8 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 8 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 8 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 8 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 8 procesos MPI y 16 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 16 procesos MPI y 1 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 16 procesos MPI y 2 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 16 procesos MPI y 4 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 16 procesos MPI y 8 hilos OpenMP...
+-------------------------------
+Ejecutando BLOQUES con 16 procesos MPI y 16 hilos OpenMP...
+===================================
+Â¡Pruebas completadas! Resultados guardados en resultados_openmp_mpi.csv.

@@ -202,127 +202,6 @@ Scene randomScene() {
 	return list;
 }
 
-// void rayTracingCPU(unsigned char* img, int w, int h, int ns = 10, int px = 0, int py = 0, int pw = -1, int ph = -1) {
-//     if (pw == -1) {
-// 		pw = w;
-// 	}
-
-//     if (ph == -1) {
-// 		ph = h;
-// 	}
-
-//     int patch_w = pw - px;
-
-//     Scene world = loadObjectsFromFile("Scene1.txt");
-//     world.setSkyColor(Vec3(0.5f, 0.7f, 1.0f));
-//     world.setInfColor(Vec3(1.0f, 1.0f, 1.0f));
-
-//     Vec3 lookfrom(13, 2, 3);
-//     Vec3 lookat(0, 0, 0);
-
-//     float dist_to_focus = 10.0;
-//     float aperture = 0.1f;
-
-//     Camera cam(lookfrom, lookat, Vec3(0, 1, 0), 20, float(w) / float(h), aperture, dist_to_focus);
-
-//     std::cout << "Número de hilos (OpenMP): " << omp_get_max_threads() << std::endl;
-//     double start_time = omp_get_wtime();
-
-//     // =======================
-//     // PARALELIZACIÓN POR FILAS
-//     // =======================
-//     #if PARALLEL_BY_ROWS
-//         #pragma omp parallel for schedule(static)
-//         for (int j = 0; j < (ph - py); j++) {
-//             for (int i = 0; i < (pw - px); i++) {
-//                 Vec3 col(0, 0, 0);
-
-//                 for (int s = 0; s < ns; s++) {
-//                     float u = float(i + px + Mirandom()) / float(w);
-//                     float v = float(j + py + Mirandom()) / float(h);
-
-//                     Ray r = cam.get_ray(u, v);
-//                     col += world.getSceneColor(r);
-//                 }
-
-//                 col /= float(ns);
-//                 col = Vec3(sqrt(col[0]), sqrt(col[1]), sqrt(col[2]));
-
-//                 img[(j * patch_w + i) * 3 + 2] = char(255.99f * col[0]);
-//                 img[(j * patch_w + i) * 3 + 1] = char(255.99f * col[1]);
-//                 img[(j * patch_w + i) * 3 + 0] = char(255.99f * col[2]);
-//             }
-//         }
-
-//     // =========================
-//     // PARALELIZACIÓN POR COLUMNAS
-//     // =========================
-//     #elif PARALLEL_BY_COLUMNS
-//         for (int j = 0; j < (ph - py); j++) {
-//             #pragma omp parallel for schedule(static)
-//             for (int i = 0; i < (pw - px); i++) {
-//                 Vec3 col(0, 0, 0);
-
-//                 for (int s = 0; s < ns; s++) {
-//                     float u = float(i + px + Mirandom()) / float(w);
-//                     float v = float(j + py + Mirandom()) / float(h);
-
-//                     Ray r = cam.get_ray(u, v);
-//                     col += world.getSceneColor(r);
-//                 }
-
-//                 col /= float(ns);
-//                 col = Vec3(sqrt(col[0]), sqrt(col[1]), sqrt(col[2]));
-
-//                 img[(j * patch_w + i) * 3 + 2] = char(255.99f * col[0]);
-//                 img[(j * patch_w + i) * 3 + 1] = char(255.99f * col[1]);
-//                 img[(j * patch_w + i) * 3 + 0] = char(255.99f * col[2]);
-//             }
-//         }
-
-//     // ================================
-//     // PARALELIZACIÓN POR BLOQUES RECTANGULARES
-//     // ================================
-//     #elif PARALLEL_BY_BLOCKS
-//         int block_width  = (pw - px) / block_count_x;
-//         int block_height = (ph - py) / block_count_y;
-
-//         #pragma omp parallel for collapse(2) schedule(static)
-//         for (int block_y = 0; block_y < block_count_y; block_y++) {
-//             for (int block_x = 0; block_x < block_count_x; block_x++) {
-//                 int start_j = block_y * block_height;
-//                 int end_j   = (block_y == block_count_y - 1) ? (ph - py) : (start_j + block_height);
-
-//                 int start_i = block_x * block_width;
-//                 int end_i   = (block_x == block_count_x - 1) ? (pw - px) : (start_i + block_width);
-
-//                 for (int j = start_j; j < end_j; j++) {
-//                     for (int i = start_i; i < end_i; i++) {
-//                         Vec3 col(0, 0, 0);
-
-//                         for (int s = 0; s < ns; s++) {
-//                             float u = float(i + px + Mirandom()) / float(w);
-//                             float v = float(j + py + Mirandom()) / float(h);
-
-//                             Ray r = cam.get_ray(u, v);
-//                             col += world.getSceneColor(r);
-//                         }
-
-//                         col /= float(ns);
-//                         col = Vec3(sqrt(col[0]), sqrt(col[1]), sqrt(col[2]));
-//                         img[(j * patch_w + i) * 3 + 2] = char(255.99f * col[0]);
-//                         img[(j * patch_w + i) * 3 + 1] = char(255.99f * col[1]);
-//                         img[(j * patch_w + i) * 3 + 0] = char(255.99f * col[2]);
-//                     }
-//                 }
-//             }
-//         }
-//     #endif
-
-//     double end_time = omp_get_wtime();
-//     std::cout << "Tiempo de renderizado (OpenMP): " << (end_time - start_time) << " segundos." << std::endl;
-// }
-
 void renderPixel(unsigned char* img, int patch_w, int i, int j, int w, int h, int px, int py, int ns, Camera& cam, Scene& world) {
     Vec3 col(0, 0, 0);
 
@@ -348,7 +227,9 @@ void rayTracingCPU(unsigned char* img, int w, int h, int ns = 10, int px = 0, in
 
     int patch_w = pw - px;
 
-    Scene world = loadObjectsFromFile("Scene1.txt");
+	// Crea la escena llamando al metodo randomScene()
+	Scene world = randomScene();
+    //Scene world = loadObjectsFromFile("Scene1.txt");
     world.setSkyColor(Vec3(0.5f, 0.7f, 1.0f));
     world.setInfColor(Vec3(1.0f, 1.0f, 1.0f));
 
@@ -420,40 +301,9 @@ void rayTracingCPU(unsigned char* img, int w, int h, int ns = 10, int px = 0, in
 }
 
 int main(int argc, char* argv[]) {
-	/* 
-	// MAIN PARA OPENMP
-	//srand(time(0));
+    // Varianble para generar los frames solo cuando se pase por parametro en el test el argumento "render"
+    bool solo_generar_imagenes = (argc > 1 && std::string(argv[1]) == "render");
 
-	int w = 256;// 1200;
-	int h = 256;// 800;
-	int ns = 10;
-
-	int patch_x_size = w;
-	int patch_y_size = h;
-	int patch_x_idx = 1;
-	int patch_y_idx = 1;
-
-	int size = sizeof(unsigned char) * patch_x_size * patch_y_size * 3;
-	unsigned char* data = (unsigned char*)calloc(size, 1);
-
-	int patch_x_start = (patch_x_idx - 1) * patch_x_size;
-	int patch_x_end = patch_x_idx * patch_x_size;
-	int patch_y_start = (patch_y_idx - 1) * patch_y_size;
-	int patch_y_end = patch_y_idx * patch_y_size;
-
-	printParallelStrategy();
-
-	rayTracingCPU(data, w, h, ns, patch_x_start, patch_y_start, patch_x_end, patch_y_end);
-
-	writeBMP("imgCPUImg1.bmp", data, patch_x_size, patch_y_size);
-	printf("Imagen creada.\n");
-
-	free(data);
-	//getchar();
-	return (0);
-	*/
-
-	// MAIN PARA MPI
 	// Inicializar MPI
     MPI_Init(&argc, &argv);
 
@@ -462,9 +312,35 @@ int main(int argc, char* argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
+    // Configuración de imagen
     int w = 256;
     int h = 256;
     int ns = 10;
+
+    if (solo_generar_imagenes) {
+        int patch_x_size = w;
+        int patch_y_size = h;
+
+        int size_bytes = sizeof(unsigned char) * patch_x_size * patch_y_size * 3;
+        unsigned char* data = (unsigned char*)calloc(size_bytes, 1);
+
+        // Mostrar estrategia de paralelización
+        printParallelStrategy();
+
+        // Usar una semilla distinta por proceso para la escena aleatoria
+        srand(time(NULL) + rank * 100);
+
+        // Renderizar
+        rayTracingCPU(data, w, h, ns, 0, 0, w, h); // Si no admite `Scene*`, puedes integrarlo dentro.
+
+        // Guardar imagen
+        std::string filename = "imgCPU_f" + std::to_string(rank) + ".bmp";
+        writeBMP(filename.c_str(), data, patch_x_size, patch_y_size);
+        std::cout << "Imagen creada (MPI + OpenMP): " << filename << std::endl;
+
+        // Liberar
+        free(data);
+    }
 
     // ======= Cálculo del reparto dinámico de filas =======
     int rows_per_process = h / size;
