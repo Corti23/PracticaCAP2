@@ -1,0 +1,6 @@
+Para ejecutar el código tienes que abrir la terminar de Visual Studio.
+
+A continuación tienes que poner el comando "cd RayTracingCPU"
+
+Una vez estemos en dentro de la carpeta RayTracingCPU, ponemos el comando "powershell -ExecutionPolicy Bypass -File test_openmp_mpi.ps1" y 
+así se nos ejecutaría el Script con todos los casos de prueba.

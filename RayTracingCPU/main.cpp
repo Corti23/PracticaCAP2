@@ -301,7 +301,7 @@ void rayTracingCPU(unsigned char* img, int w, int h, int ns = 10, int px = 0, in
 }
 
 int main(int argc, char* argv[]) {
-    // Varianble para generar los frames solo cuando se pase por parametro en el test el argumento "render"
+    // Variable para generar los frames solo cuando se pase por parametro en el test el argumento "render"
     bool solo_generar_imagenes = (argc > 1 && std::string(argv[1]) == "render");
 
 	// Inicializar MPI
@@ -331,7 +331,7 @@ int main(int argc, char* argv[]) {
         srand(time(NULL) + rank * 100);
 
         // Renderizar
-        rayTracingCPU(data, w, h, ns, 0, 0, w, h); // Si no admite `Scene*`, puedes integrarlo dentro.
+        rayTracingCPU(data, w, h, ns, 0, 0, w, h);
 
         // Guardar imagen
         std::string filename = "imgCPU_f" + std::to_string(rank) + ".bmp";
